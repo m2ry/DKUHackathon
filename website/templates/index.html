@@ -1,11 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Randomly Generated Checklist</title>
+    <meta charset="utf-8">
+    <title>Defi-ing</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/template.css') }}">
 </head>
-<body style="background-color: {{ colors.background }}">
+<body>
+    <header> 
+        <div class="container">
+            <h1 class="logo">HACKDKU - Defi-ing Insurance</h1>
+            <strong><nav>
+              <ul class="menu">
+                <li><a href="{{url_for('home')}}">Home</a></li>
+                <li><a href="{{url_for('index')}}">Tasks</a></li>
+              </ul>
+            </nav></strong>
+          </div>
+        </header>
     <h1>Randomly Generated Checklist</h1>
     <form action="/generate_checklist" method="post">
         <label for="location">Choose your location:</label>
