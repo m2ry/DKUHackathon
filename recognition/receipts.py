@@ -1,4 +1,6 @@
 from imutils.perspective import four_point_transform
+from PIL import Image
+import numpy as np
 import pytesseract
 import argparse
 import imutils
@@ -19,10 +21,10 @@ gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 blur = cv2.GaussianBlur(gray, (5, 5,), 0)
 edge = cv2.Canny(blur, 75, 200)
 
-if args["debug"] > 0:
-  cv2.imshow("Input", image)
-  cv2.imshow("W/ Edges", edge)
-  cv2.waitKey(0)
+# if args["debug"] > 0:
+#   cv2.imshow("Input", image)
+#   cv2.imshow("W/ Edges", edge)
+#   cv2.waitKey(0)
 
 contours = cv2.findContours(edge.copy(), cv2.RETR_EXTERNAL,
                         cv2.CHAIN_APPROX_SIMPLE)
@@ -31,13 +33,16 @@ contours = sorted(contours, key=cv2.contourArea, reverse=True)
 
 receipt_contour = None
 
-for c in contours:
-  perimeter = cv2.arcLength(c, True)
-  approx = cv2.approxPolyDP(c, 0.02 * perimeter, True)
+# for c in contours:
+#   perimeter = cv2.arcLength(c, True)
+#   approx = cv2.approxPolyDP(c, 0.02 * perimeter, True)
 
-  if len(approx) == 4:
-    receipt_contour = approx
-    break
+#   if len(approx) == 4:
+#     receipt_contour = approx
+#     break
+
+height, width = image.shape[:2]
+receipt_contour = np.array([[0, 0]], [0, height]], [[width, height]], [[width, 0]]])
 
 if args["debug"] > 0:
   output = image.copy()
@@ -47,18 +52,21 @@ if args["debug"] > 0:
 
 receipt = four_point_transform(orig, receiptContours.reshape(4, 2) * ratio)
 
-cv2.imshow(imutils.resize(receipt, width=500))
-cv2.waitKey(0)
+# cv2.imshow(imutils.resize(receipt, width=500))
+# cv2.waitKey(0)
 
 options = "--psm 4"
-text = pytesseract.image_to_string(cv2.cvtColor(receipt, cv2.COLOR_BGR2RGB), config=options)
+reciept = cv2.cvtColor(receipt, cv2.COLOR_BGR2RGB)
+text = pytesseract.image_to_string(receipt, config=options)
 
-print("[INFO} raw output:")
-print(text)
+print("[INFO] Full Receipt:")
+for row in text.split("\n"):
+  if row.strip():
+    print(row)
 print("\n")
 
 pricePattern = r'([0-9]+\.[0-9]+)'
-print("[INFO] price line items:")
+print("[INFO] Price-line Items:")
 
 for row in text.split("\n"):
   if re.search(pricePattern, row) is not None:
