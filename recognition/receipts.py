@@ -71,3 +71,6 @@ print("[INFO] Price-line Items:")
 for row in text.split("\n"):
   if re.search(pricePattern, row) is not None:
     print(row)
+
+# HOW TO RUN:
+# python3 receipts.py --image simple-receipt.png
