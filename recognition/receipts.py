@@ -42,7 +42,7 @@ receipt_contour = None
 #     break
 
 height, width = image.shape[:2]
-receipt_contour = np.array([[0, 0]], [0, height]], [[width, height]], [[width, 0]]])
+receipt_contour = np.array([[[0, 0]], [[0, height]], [[width, height]], [[width, 0]]])
 
 if args["debug"] > 0:
   output = image.copy()
@@ -54,6 +54,9 @@ receipt = four_point_transform(orig, receiptContours.reshape(4, 2) * ratio)
 
 # cv2.imshow(imutils.resize(receipt, width=500))
 # cv2.waitKey(0)
+
+# receipt_image = Image.fromarray(receipt)
+# receipt_image.save("receipttest.png")
 
 options = "--psm 4"
 reciept = cv2.cvtColor(receipt, cv2.COLOR_BGR2RGB)
