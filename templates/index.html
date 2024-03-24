@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Randomly Generated Checklist</title>
+</head>
+<body style="background-color: {{ colors.background }}">
+    <h1>Randomly Generated Checklist</h1>
+    <form action="/generate_checklist" method="post">
+        <label for="location">Choose your location:</label>
+        <select name="location" id="location">
+            {% for option in location_options %}
+                <option value="{{ option }}">{{ option }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" style="background-color: {{ colors.button }}; color: {{ colors.text }}">Generate</button>
+    </form>
+</body>
+</html>

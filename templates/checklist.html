@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checklist</title>
+</head>
+<body style="background-color: {{ colors.background }}">
+    <h2>Checklist</h2>
+    <ul>
+        {% for suggestion in suggestion_list %}
+            <li>{{ suggestion }}</li>
+        {% endfor %}
+    </ul>
+    <p>Click on upload button to create a certificate.</p>
+</body>
+</html>
