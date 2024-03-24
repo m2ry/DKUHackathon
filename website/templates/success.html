@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Success!</title>
+    <meta charset="utf-8">
+    <title>Defi-ing</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/template.css') }}">
 </head>
-<body style="background-color: {{ colors.background }}">
+<body>
+    <header> 
+    <div class="container">
+        <h1 class="logo">HACKDKU - Defi-ing Insurance</h1>
+        <strong><nav>
+          <ul class="menu">
+            <li><a href="{{url_for('home')}}">Home</a></li>
+            <li><a href="{{url_for('index')}}">Tasks</a></li>
+          </ul>
+        </nav></strong>
+      </div>
+    </header>
     <h2>Success!</h2>
-    <p>You have created a certificate on the blockchain that proves you have taken steps to protect your house.</p>
-    <p>Insurance companies will now utilize this proof to provide discounts on insurance.</p>
+    <p>You have created a certificate on the blockchain that proves you have taken steps to protect your house.</p >
+    <p>Insurance companies will now utilize this proof to provide discounts on insurance.</p >
 </body>
 </html>
