@@ -50,7 +50,7 @@ if args["debug"] > 0:
   cv2.imshow("Receipt Outline", output)
   cv2.waitKey(0)
 
-receipt = four_point_transform(orig, receiptContours.reshape(4, 2) * ratio)
+receipt = four_point_transform(orig, receipt_contours.reshape(4, 2) * ratio)
 
 # cv2.imshow(imutils.resize(receipt, width=500))
 # cv2.waitKey(0)
